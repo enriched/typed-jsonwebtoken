@@ -19,17 +19,15 @@ declare namespace jsonwebtoken {
          * - none:     No digital signature or MAC value included
          */
         algorithm?: string;
-        /**
-         *@deprecated - see expiresIn
-         *@member {number} - Lifetime for the token in minutes
-         */
-        expiresInMinutes?: number;
         /** @member {string} - Lifetime for the token expressed in a string describing a time span [rauchg/ms](https://github.com/rauchg/ms.js). Eg: `60`, `"2 days"`, `"10h"`, `"7d"` */
-        expiresIn?: string;
+        expiresIn?: string | number;
+        notBefore?: string | number;
         audience?: string;
         subject?: string;
         issuer?: string;
+        jwtid?: string;
         noTimestamp?: boolean;
+        headers?: Object;
     }
 
     export interface VerifyOptions {
@@ -37,7 +35,13 @@ declare namespace jsonwebtoken {
         audience?: string;
         issuer?: string;
         ignoreExpiration?: boolean;
-        maxAge?: string;
+        ignoreNotBefore?: boolean;
+        subject?: string;
+    }
+
+    export interface DecodeOptions {
+        json?: boolean;
+        complete?: boolean;
     }
 
     export interface VerifyCallback {
@@ -49,22 +53,12 @@ declare namespace jsonwebtoken {
     }
 
     /**
-     * Synchronously sign the given payload into a JSON Web Token string
-     * @param {String|Object|Buffer} payload - Payload to sign, could be an literal, buffer or string
-     * @param {String|Buffer} secretOrPrivateKey - Either the secret for HMAC algorithms, or the PEM encoded private key for RSA and ECDSA.
-     * @param {SignOptions} [options] - Options for the signature
-     * @returns {String} The JSON Web Token string
-     */
-    export function sign(payload: string | Buffer | Object, secretOrPrivateKey: string | Buffer, options?: SignOptions): string;
-
-    /**
      * Sign the given payload into a JSON Web Token string
      * @param {String|Object|Buffer} payload - Payload to sign, could be an literal, buffer or string
      * @param {String|Buffer} secretOrPrivateKey - Either the secret for HMAC algorithms, or the PEM encoded private key for RSA and ECDSA.
      * @param {SignOptions} [options] - Options for the signature
      * @param {Function} callback - Callback to get the encoded token on
      */
-    export function sign(payload: string | Buffer | Object, secretOrPrivateKey: string | Buffer, callback?: SignCallback): void;
     export function sign(payload: string | Buffer | Object, secretOrPrivateKey: string | Buffer, options: SignOptions, callback?: SignCallback): void;
 
     /**
@@ -74,7 +68,6 @@ declare namespace jsonwebtoken {
      * @param {VerifyOptions} [options] - Options for the verification
      * @returns The decoded token.
      */
-    function verify(token: string, secretOrPublicKey: string | Buffer): any;
     function verify(token: string, secretOrPublicKey: string | Buffer, options?: VerifyOptions): any;
 
     /**
