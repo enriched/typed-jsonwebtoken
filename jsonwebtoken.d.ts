@@ -1,6 +1,6 @@
 // Type definitions for jsonwebtoken 0.4.0
 // Project: https://github.com/auth0/node-jsonwebtoken
-// Definitions by: Maxime LUCE <https://github.com/SomaticIT>
+// Definitions by: enriched <https://github.com/enriched>
 
 declare namespace jsonwebtoken {
 
