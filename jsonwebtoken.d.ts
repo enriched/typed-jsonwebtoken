@@ -49,7 +49,7 @@ declare namespace jsonwebtoken {
     }
 
     export interface SignCallback {
-        (err: Error, encoded: string): void;
+        (encoded: string): void;
     }
 
     /**
