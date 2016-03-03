@@ -58,7 +58,9 @@ declare namespace jsonwebtoken {
      * @param {String|Buffer} secretOrPrivateKey - Either the secret for HMAC algorithms, or the PEM encoded private key for RSA and ECDSA.
      * @param {SignOptions} [options] - Options for the signature
      * @param {Function} callback - Callback to get the encoded token on
+     * @returns {string} the signed token
      */
+    export function sign(payload: string | Buffer | Object, secretOrPrivateKey: string | Buffer, options: SignOptions): string;
     export function sign(payload: string | Buffer | Object, secretOrPrivateKey: string | Buffer, options: SignOptions, callback?: SignCallback): void;
 
     /**
