@@ -60,8 +60,8 @@ declare namespace jsonwebtoken {
      * @param {Function} callback - Callback to get the encoded token on
      * @returns {string} the signed token
      */
-    export function sign(payload: string | Buffer | Object, secretOrPrivateKey: string | Buffer, options: SignOptions): string;
-    export function sign(payload: string | Buffer | Object, secretOrPrivateKey: string | Buffer, options: SignOptions, callback?: SignCallback): void;
+    export function sign(payload: string | Buffer | Object, secretOrPrivateKey: string | Buffer, options?: SignOptions): string;
+    export function sign(payload: string | Buffer | Object, secretOrPrivateKey: string | Buffer, options?: SignOptions, callback?: SignCallback): void;
 
     /**
      * Synchronously verify given token using a secret or a public key to get a decoded token
