@@ -1,4 +1,4 @@
-// Type definitions for jsonwebtoken 0.4.0
+// Type definitions for jsonwebtoken 6.2.0
 // Project: https://github.com/auth0/node-jsonwebtoken
 // Definitions by: enriched <https://github.com/enriched>
 
@@ -27,7 +27,7 @@ declare namespace jsonwebtoken {
         issuer?: string;
         jwtid?: string;
         noTimestamp?: boolean;
-        headers?: Object;
+        header?: Object;
     }
 
     export interface VerifyOptions {
@@ -37,6 +37,8 @@ declare namespace jsonwebtoken {
         ignoreExpiration?: boolean;
         ignoreNotBefore?: boolean;
         subject?: string;
+        /** number of second to tolerate when checking the `nbf` and `exp` claims, to deal with small clock differences among different servers */
+        clockTolerance?: number;
     }
 
     export interface DecodeOptions {
@@ -49,7 +51,7 @@ declare namespace jsonwebtoken {
     }
 
     export interface SignCallback {
-        (encoded: string): void;
+        (err: Error, encoded: string): void;
     }
 
     /**
